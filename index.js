@@ -8,18 +8,21 @@ function parse(str) {
   do {
     head = arr[0]
     tail = arr[arrLength - 1]
-    arr = [...arr.slice(1, arr.length -1)]
-    arrLength = arr.length
     if (head === '<' && tail === '>') {
-      console.log('opened new tag')
+      console.log('Opened new tag')
       let thisTag = ''
-      let i = 0
+      let i = 1
       while (arr[i] !== '>') {
         thisTag += arr[i]
         i++ 
-      } 
+      }
+      arr = [...arr.slice(thisTag.length + 1, arr.length - (thisTag.length + 2))] // to accommodate for 2 chars />
+      console.log("The current tag >>", thisTag)
+      // TODO: handle tag attributes
     } else {
-      console.log('inside tag')
+      arr = [...arr.slice(1, arr.length -1)]
+      arrLength = arr.length
+      console.log('Inside a tag', arr)
     }
   } while (arrLength)
   
